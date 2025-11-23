@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thư Mời Liên hoan tốt nghiệp - Bác Sĩ Nội Trú K47</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 20px;
+      }
+
+      .invitation-card {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        padding: 50px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .header h1 {
+        color: #667eea;
+        font-size: 32px;
+        margin-bottom: 10px;
+      }
+
+      .header .subtitle {
+        color: #666;
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      .divider {
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #667eea, transparent);
+        margin: 30px 0;
+      }
+
+      .content {
+        color: #333;
+        line-height: 1.8;
+        font-size: 16px;
+      }
+
+      .content p {
+        margin-bottom: 15px;
+      }
+
+      .event-details {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 12px;
+        margin: 30px 0;
+      }
+
+      .event-details h3 {
+        color: #667eea;
+        margin-bottom: 15px;
+      }
+
+      .event-details p {
+        margin-bottom: 8px;
+      }
+
+      .event-details strong {
+        color: #333;
+      }
+
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin: 30px 0;
+      }
+
+      .gallery-item {
+        aspect-ratio: 1;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 14px;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .rsvp-section {
+        margin-top: 40px;
+        padding: 30px;
+        background: #f8f9fa;
+        border-radius: 12px;
+        text-align: center;
+        display: none;
+      }
+
+      .rsvp-section.show {
+        display: block;
+      }
+
+      .rsvp-question {
+        font-size: 24px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 30px;
+      }
+
+      .guest-name {
+        color: #667eea;
+      }
+
+      .rsvp-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .rsvp-btn {
+        padding: 15px 40px;
+        font-size: 18px;
+        font-weight: 600;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s;
+        min-width: 200px;
+      }
+
+      .btn-yes {
+        background: #28a745;
+        color: white;
+      }
+
+      .btn-yes:hover {
+        background: #218838;
+        transform: translateY(-2px);
+      }
+
+      .btn-no {
+        background: #dc3545;
+        color: white;
+      }
+
+      .btn-no:hover {
+        background: #c82333;
+        transform: translateY(-2px);
+      }
+
+      .rsvp-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none !important;
+      }
+
+      .thank-you {
+        display: none;
+        text-align: center;
+        padding: 30px;
+        background: white;
+        border-radius: 12px;
+        margin-top: 20px;
+      }
+
+      .thank-you.show {
+        display: block;
+      }
+
+      .thank-you h3 {
+        color: #28a745;
+        font-size: 24px;
+        margin-bottom: 15px;
+      }
+
+      .thank-you p {
+        color: #666;
+        font-size: 16px;
+      }
+
+      /* Fireworks animation */
+      .firework {
+        position: fixed;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 1000;
+      }
+
+      @keyframes explode {
+        0% {
+          opacity: 1;
+          transform: translate(0, 0) scale(1);
+        }
+        100% {
+          opacity: 0;
+          transform: translate(var(--tx), var(--ty)) scale(0);
+        }
+      }
+
+      .scroll-indicator {
+        text-align: center;
+        margin-top: 30px;
+        color: #667eea;
+        font-weight: 600;
+        animation: bounce 2s infinite;
+      }
+
+      @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-10px);
+        }
+        60% {
+          transform: translateY(-5px);
+        }
+      }
+
+      @media (max-width: 600px) {
+        .invitation-card {
+          padding: 30px 20px;
+        }
+
+        .header h1 {
+          font-size: 24px;
+        }
+
+        .rsvp-question {
+          font-size: 20px;
+        }
+
+        .rsvp-btn {
+          min-width: 150px;
+          padding: 12px 30px;
+          font-size: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="invitation-card">
+        <div class="header">
+          <h1>🎓 THƯ MỜI LIÊN HOAN TỐT NGHIỆP</h1>
+          <p class="subtitle">Bác sĩ nội trú thần kinh - khóa 47</p>
+          <p class="subtitle">Trường Đại Học Y Hà Nội</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="content">
+          <p>
+            Kính gửi: <strong id="guestTitle"></strong>
+            <strong id="guestName"></strong>
+          </p>
+
+          <p>
+            Với niềm vui và tự hào, chúng em - Bác sĩ nội trú thần kinh - Khóa
+            47 Trường Đại học Y Hà Nội xin trân trọng kính mời quý Thầy/Cô,
+            Anh/chị/em và bạn bè đến dự bữa tiệc thân mật Chúc mừng Tốt nghiệp
+            của chúng em.
+          </p>
+
+          <p>
+            Sau những năm tháng học tập và rèn luyện không ngừng nghỉ, chúng em
+            đã hoàn thành chương trình đào tạo Bác sĩ Nội trú. Đây là dấu mốc
+            quan trọng, đánh dấu bước chuyển mình trong sự nghiệp y khoa của
+            chúng em.
+          </p>
+
+          <div class="event-details">
+            <h3>📅 THÔNG TIN SỰ KIỆN</h3>
+            <p><strong>Thời gian:</strong> 19:00, Thứ Bảy, ngày 14/12/2024</p>
+            <p>
+              <strong>Địa điểm:</strong> Hội trường A1, Trường Đại học Y Hà Nội
+            </p>
+            <p><strong>Địa chỉ:</strong> Số 1 Tôn Thất Tùng, Đống Đa, Hà Nội</p>
+            <p><strong>Dress code:</strong> Trang trọng</p>
+          </div>
+
+          <div style="width: 100%">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.7275195944144!2d105.82805537548901!3d21.00355688063948!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ac7c33fd6323%3A0x930d205cf25ff492!2sHanoi%20Medical%20University!5e0!3m2!1sen!2s!4v1763915723235!5m2!1sen!2s"
+              width="600"
+              height="450"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+
+          <p>Chương trình gồm:</p>
+          <ul style="margin-left: 30px; margin-bottom: 15px">
+            <li>Tiệc thân mật tại nhà hàng</li>
+            <li>Chương trình giao lưu ca nhạc</li>
+          </ul>
+
+          <div class="gallery">
+            <div class="gallery-item">
+              <p>👨‍⚕️<br />Đội ngũ Bác sĩ<br />Nội trú K47</p>
+            </div>
+            <div class="gallery-item">
+              <p>🏥<br />Thực hành<br />Lâm sàng</p>
+            </div>
+            <div class="gallery-item">
+              <p>📚<br />Học tập<br />& Nghiên cứu</p>
+            </div>
+            <div class="gallery-item">
+              <p>🎉<br />Kỷ niệm<br />Tốt nghiệp</p>
+            </div>
+          </div>
+
+          <p>
+            Sự hiện diện của quý Thầy/Cô sẽ là niềm vinh dự và động lực to lớn
+            cho chúng em trong hành trình phía trước.
+          </p>
+
+          <p style="text-align: right; margin-top: 30px; font-style: italic">
+            Trân trọng kính mời!<br />
+            <strong>Ban Tổ Chức</strong><br />
+            Bác sĩ Nội trú thần kinh - Khóa 47<br />
+            Trường ĐH Y Hà Nội
+          </p>
+        </div>
+
+        <div class="scroll-indicator">
+          ↓ Vui lòng cuộn xuống để xác nhận tham dự ↓
+        </div>
+
+        <div class="rsvp-section" id="rsvpSection">
+          <p class="rsvp-question">
+            <span class="guest-name" id="rsvpGuestName"></span> chắc chắn tham
+            dự được chứ?
+          </p>
+          <div class="rsvp-buttons">
+            <button
+              class="rsvp-btn btn-yes"
+              onclick="submitRSVP('Chắc chắn rồi')"
+            >
+              ✓ Chắc chắn rồi
+            </button>
+            <button
+              class="rsvp-btn btn-no"
+              onclick="submitRSVP('Tôi bận mất rồi')"
+            >
+              ✗ Tôi bận mất rồi
+            </button>
+          </div>
+        </div>
+
+        <div class="thank-you" id="thankYou">
+          <h3>Cảm ơn bạn!</h3>
+          <p id="thankYouMessage"></p>
+        </div>
+      </div>
+    </div>
+    <audio controls>
+      <source src="your-audio-file.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+
+    <script>
+      // Thay đổi URL này thành URL của Google Apps Script Web App
+      const GOOGLE_SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
+
+      let guestData = null;
+
+      // Parse invite data from URL
+      function parseInviteData() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const inviteParam = urlParams.get("invite");
+
+        if (inviteParam) {
+          try {
+            const decoded = JSON.parse(decodeURIComponent(atob(inviteParam)));
+            return decoded;
+          } catch (e) {
+            console.error("Error parsing invite data:", e);
+            return null;
+          }
+        }
+        return null;
+      }
+
+      // Initialize page
+      window.addEventListener("DOMContentLoaded", function () {
+        guestData = parseInviteData();
+
+        if (guestData) {
+          document.getElementById("guestTitle").textContent = guestData.title;
+          document.getElementById("guestName").textContent = guestData.name;
+          document.getElementById("rsvpGuestName").textContent =
+            guestData.title + " " + guestData.name;
+        } else {
+          document.getElementById("guestTitle").textContent = "Quý khách";
+          document.getElementById("guestName").textContent = "";
+          document.getElementById("rsvpGuestName").textContent = "Bạn";
+        }
+
+        // Start fireworks
+        createFireworks();
+
+        // Show RSVP section when scrolling near bottom
+        window.addEventListener("scroll", function () {
+          const scrollPosition = window.innerHeight + window.scrollY;
+          const documentHeight = document.documentElement.scrollHeight;
+
+          if (scrollPosition >= documentHeight - 300) {
+            document.getElementById("rsvpSection").classList.add("show");
+          }
+        });
+      });
+
+      // Create fireworks effect
+      function createFireworks() {
+        setInterval(() => {
+          const colors = [
+            "#ff0000",
+            "#00ff00",
+            "#0000ff",
+            "#ffff00",
+            "#ff00ff",
+            "#00ffff",
+          ];
+          const x = Math.random() * window.innerWidth;
+          const y = Math.random() * (window.innerHeight / 2);
+
+          for (let i = 0; i < 30; i++) {
+            createParticle(
+              x,
+              y,
+              colors[Math.floor(Math.random() * colors.length)]
+            );
+          }
+        }, 2000);
+      }
+
+      function createParticle(x, y, color) {
+        const particle = document.createElement("div");
+        particle.className = "firework";
+        particle.style.left = x + "px";
+        particle.style.top = y + "px";
+        particle.style.background = color;
+
+        const angle = Math.random() * Math.PI * 2;
+        const velocity = 50 + Math.random() * 100;
+        const tx = Math.cos(angle) * velocity;
+        const ty = Math.sin(angle) * velocity;
+
+        particle.style.setProperty("--tx", tx + "px");
+        particle.style.setProperty("--ty", ty + "px");
+        particle.style.animation = "explode 1s ease-out forwards";
+
+        document.body.appendChild(particle);
+
+        setTimeout(() => {
+          particle.remove();
+        }, 1000);
+      }
+
+      // Submit RSVP
+      async function submitRSVP(response) {
+        const buttons = document.querySelectorAll(".rsvp-btn");
+        buttons.forEach((btn) => (btn.disabled = true));
+
+        const data = {
+          title: guestData ? guestData.title : "Khách",
+          name: guestData ? guestData.name : "Chưa xác định",
+          response: response,
+          timestamp: new Date().toISOString(),
+        };
+
+        try {
+          // Send to Google Apps Script
+          const googleResponse = await fetch(GOOGLE_SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          });
+
+          // Show thank you message
+          document.getElementById("rsvpSection").style.display = "none";
+          const thankYouDiv = document.getElementById("thankYou");
+          const thankYouMessage = document.getElementById("thankYouMessage");
+
+          if (response === "Chắc chắn rồi") {
+            thankYouMessage.textContent =
+              "Chúng em rất vui mừng và mong chờ được gặp bạn tại sự kiện!";
+          } else {
+            thankYouMessage.textContent =
+              "Chúng tôi rất tiếc vì bạn không thể tham dự. Hẹn gặp lại bạn vào dịp khác!";
+          }
+
+          thankYouDiv.classList.add("show");
+
+          // Create celebration fireworks
+          for (let i = 0; i < 5; i++) {
+            setTimeout(() => {
+              const x = Math.random() * window.innerWidth;
+              const y = Math.random() * window.innerHeight;
+              const colors = [
+                "#ff0000",
+                "#00ff00",
+                "#0000ff",
+                "#ffff00",
+                "#ff00ff",
+              ];
+              for (let j = 0; j < 50; j++) {
+                createParticle(
+                  x,
+                  y,
+                  colors[Math.floor(Math.random() * colors.length)]
+                );
+              }
+            }, i * 200);
+          }
+        } catch (error) {
+          console.error("Error submitting RSVP:", error);
+          alert("Đã xảy ra lỗi khi gửi phản hồi. Vui lòng thử lại sau.");
+          buttons.forEach((btn) => (btn.disabled = false));
+        }
+      }
+    </script>
+  </body>
+</html>
