@@ -1,228 +1,253 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ban Tổ Chức - Tạo Thư Mời</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
 
-        .container {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 500px;
-            width: 100%;
-        }
+      .container {
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        max-width: 500px;
+        width: 100%;
+      }
 
-        h1 {
-            color: #667eea;
-            margin-bottom: 10px;
-            font-size: 28px;
-            text-align: center;
-        }
+      h1 {
+        color: #667eea;
+        margin-bottom: 10px;
+        font-size: 28px;
+        text-align: center;
+      }
 
-        .subtitle {
-            color: #666;
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 14px;
-        }
+      .subtitle {
+        color: #666;
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 14px;
+      }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
+      .form-group {
+        margin-bottom: 20px;
+      }
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #333;
-            font-weight: 600;
-        }
+      label {
+        display: block;
+        margin-bottom: 8px;
+        color: #333;
+        font-weight: 600;
+      }
 
-        input, select {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
+      input,
+      select {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: border-color 0.3s;
+      }
 
-        input:focus, select:focus {
-            outline: none;
-            border-color: #667eea;
-        }
+      input:focus,
+      select:focus {
+        outline: none;
+        border-color: #667eea;
+      }
 
-        button {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
+      button {
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.2s;
+      }
 
-        button:hover {
-            transform: translateY(-2px);
-        }
+      button:hover {
+        transform: translateY(-2px);
+      }
 
-        button:active {
-            transform: translateY(0);
-        }
+      button:active {
+        transform: translateY(0);
+      }
 
-        .result {
-            margin-top: 30px;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            display: none;
-        }
+      .result {
+        margin-top: 30px;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        display: none;
+      }
 
-        .result.show {
-            display: block;
-        }
+      .result.show {
+        display: block;
+      }
 
-        .link-container {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
+      .link-container {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+      }
 
-        .link-input {
-            flex: 1;
-            padding: 10px;
-            background: white;
-            border: 2px solid #667eea;
-            border-radius: 8px;
-            font-size: 14px;
-            word-break: break-all;
-        }
+      .link-input {
+        flex: 1;
+        padding: 10px;
+        background: white;
+        border: 2px solid #667eea;
+        border-radius: 8px;
+        font-size: 14px;
+        word-break: break-all;
+      }
 
-        .copy-btn {
-            padding: 10px 20px;
-            background: #667eea;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            white-space: nowrap;
-        }
+      .copy-btn {
+        padding: 10px 20px;
+        background: #667eea;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        white-space: nowrap;
+      }
 
-        .copy-btn:hover {
-            background: #5568d3;
-        }
+      .copy-btn:hover {
+        background: #5568d3;
+      }
 
-        .success-message {
-            color: #28a745;
-            text-align: center;
-            margin-top: 10px;
-            font-weight: 600;
-            display: none;
-        }
+      .success-message {
+        color: #28a745;
+        text-align: center;
+        margin-top: 10px;
+        font-weight: 600;
+        display: none;
+      }
 
-        .success-message.show {
-            display: block;
-        }
+      .success-message.show {
+        display: block;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <h1>🎓 Tạo Thư Mời</h1>
-        <p class="subtitle">Sự kiện Chúc mừng Tốt nghiệp Bác sĩ Nội trú<br>Trường ĐH Y Hà Nội - K47</p>
-        
-        <form id="inviteForm">
-            <div class="form-group">
-                <label for="title">Danh xưng:</label>
-                <select id="title" required>
-                    <option value="">-- Chọn danh xưng --</option>
-                    <option value="Bác sĩ">Bác sĩ</option>
-                    <option value="Thạc sĩ">Thạc sĩ</option>
-                    <option value="Tiến sĩ">Tiến sĩ</option>
-                    <option value="Giáo sư">Giáo sư</option>
-                    <option value="Anh">Anh</option>
-                    <option value="Chị">Chị</option>
-                    <option value="Ông">Ông</option>
-                    <option value="Bà">Bà</option>
-                </select>
-            </div>
+      <h1>🎓 Tạo Thư Mời</h1>
+      <p class="subtitle">
+        Sự kiện Chúc mừng Tốt nghiệp Bác sĩ Nội trú thần kinh - khóa 47<br />Trường
+        đại học Y Hà Nội
+      </p>
 
-            <div class="form-group">
-                <label for="fullName">Họ và tên khách mời:</label>
-                <input type="text" id="fullName" placeholder="Nhập họ và tên" required>
-            </div>
-
-            <button type="submit">Tạo Link Mời</button>
-        </form>
-
-        <div class="result" id="result">
-            <p style="font-weight: 600; color: #333; margin-bottom: 10px;">Link thư mời đã được tạo:</p>
-            <div class="link-container">
-                <input type="text" class="link-input" id="inviteLink" readonly>
-                <button class="copy-btn" onclick="copyLink()">Copy</button>
-            </div>
-            <p class="success-message" id="copySuccess">✓ Đã copy link!</p>
+      <form id="inviteForm">
+        <div class="form-group">
+          <label for="title">Danh xưng:</label>
+          <select id="title" required>
+            <option value="">-- Chọn danh xưng --</option>
+            <option value="Bác sĩ">Bác sĩ</option>
+            <option value="Bác sĩ chuyên khoa 2">Bác sĩ chuyên khoa 2</option>
+            <option value="Thạc sĩ">Thạc sĩ</option>
+            <option value="Tiến sĩ">Tiến sĩ</option>
+            <option value="Giáo sư">Giáo sư</option>
+            <option value="Phó giáo sư">Phó giáo sư</option>
+            <option value="Anh">Anh</option>
+            <option value="Chị">Chị</option>
+            <option value="Ông">Ông</option>
+            <option value="Bà">Bà</option>
+            <option value="Bà">Em</option>
+          </select>
         </div>
+
+        <div class="form-group">
+          <label for="fullName">Họ và tên khách mời:</label>
+          <input
+            type="text"
+            id="fullName"
+            placeholder="Nhập họ và tên"
+            required
+          />
+        </div>
+
+        <button type="submit">Tạo Link Mời</button>
+      </form>
+
+      <div class="result" id="result">
+        <p style="font-weight: 600; color: #333; margin-bottom: 10px">
+          Link thư mời đã được tạo:
+        </p>
+        <div class="link-container">
+          <input type="text" class="link-input" id="inviteLink" readonly />
+          <button class="copy-btn" onclick="copyLink()">Copy</button>
+        </div>
+        <p class="success-message" id="copySuccess">✓ Đã copy link!</p>
+      </div>
     </div>
 
     <script>
-        document.getElementById('inviteForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const title = document.getElementById('title').value;
-            const fullName = document.getElementById('fullName').value;
-            
-            // Mã hóa thông tin để đưa vào URL
-            const inviteData = btoa(encodeURIComponent(JSON.stringify({
-                title: title,
-                name: fullName
-            })));
-            
-            // Tạo link với đường dẫn tương đối
-            const inviteLink = window.location.origin + window.location.pathname.replace('organizer.html', 'invitation.html') + '?invite=' + inviteData;
-            
-            // Hiển thị kết quả
-            document.getElementById('inviteLink').value = inviteLink;
-            document.getElementById('result').classList.add('show');
-            
-            // Reset form
-            this.reset();
+      document
+        .getElementById("inviteForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const title = document.getElementById("title").value;
+          const fullName = document.getElementById("fullName").value;
+
+          // Mã hóa thông tin để đưa vào URL
+          const inviteData = encodeURIComponent(
+            JSON.stringify({
+              title: title,
+              name: fullName,
+            })
+          );
+          // Tạo link với đường dẫn tương đối
+          const inviteLink =
+            window.location.origin +
+            window.location.pathname.replace(
+              "organizer.html",
+              "invitation.html"
+            ) +
+            "?invite=" +
+            inviteData;
+
+          // Hiển thị kết quả
+          document.getElementById("inviteLink").value = inviteLink;
+          document.getElementById("result").classList.add("show");
+
+          // Reset form
+          this.reset();
         });
 
-        function copyLink() {
-            const linkInput = document.getElementById('inviteLink');
-            linkInput.select();
-            linkInput.setSelectionRange(0, 99999); // For mobile devices
-            
-            navigator.clipboard.writeText(linkInput.value).then(function() {
-                const successMsg = document.getElementById('copySuccess');
-                successMsg.classList.add('show');
-                
-                setTimeout(function() {
-                    successMsg.classList.remove('show');
-                }, 2000);
-            });
-        }
+      function copyLink() {
+        const linkInput = document.getElementById("inviteLink");
+        linkInput.select();
+        linkInput.setSelectionRange(0, 99999); // For mobile devices
+
+        navigator.clipboard.writeText(linkInput.value).then(function () {
+          const successMsg = document.getElementById("copySuccess");
+          successMsg.classList.add("show");
+
+          setTimeout(function () {
+            successMsg.classList.remove("show");
+          }, 2000);
+        });
+      }
     </script>
-</body>
+  </body>
 </html>
