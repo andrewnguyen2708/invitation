@@ -106,18 +106,24 @@
 
       .link-container {
         display: flex;
+        flex-direction: column;
         gap: 10px;
         margin-top: 15px;
       }
 
       .link-input {
         flex: 1;
+        width: 100%;
         padding: 10px;
         background: white;
         border: 2px solid #667eea;
         border-radius: 8px;
         font-size: 14px;
         word-break: break-all;
+        color: #333;
+        min-height: 50px;
+        resize: none;
+        font-family: inherit;
       }
 
       .copy-btn {
@@ -193,7 +199,12 @@
           Link thư mời đã được tạo:
         </p>
         <div class="link-container">
-          <input type="text" class="link-input" id="inviteLink" readonly />
+          <textarea
+            class="link-input"
+            id="inviteLink"
+            readonly
+            rows="4"
+          ></textarea>
           <button class="copy-btn" onclick="copyLink()">Copy</button>
         </div>
         <p class="success-message" id="copySuccess">✓ Đã copy link!</p>
@@ -210,21 +221,16 @@
           const fullName = document.getElementById("fullName").value;
 
           // Mã hóa thông tin để đưa vào URL
-          const inviteData = encodeURIComponent(
-            JSON.stringify({
-              title: title,
-              name: fullName,
-            })
-          );
+          const inviteData = {
+            title: title,
+            name: fullName,
+          };
           // Tạo link với đường dẫn tương đối
-          const inviteLink =
-            window.location.origin +
-            window.location.pathname.replace(
-              "organizer.html",
-              "invitation.html"
-            ) +
-            "?invite=" +
-            inviteData;
+          const inviteLink = `${
+            window.origin
+          }/invitation.html?title=${encodeURIComponent(
+            title
+          )}&name=${encodeURIComponent(fullName)}`;
 
           // Hiển thị kết quả
           document.getElementById("inviteLink").value = inviteLink;

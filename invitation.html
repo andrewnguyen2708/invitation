@@ -286,14 +286,16 @@
 
         <div class="content">
           <p>
-            Kính gửi: <strong id="guestTitle"></strong>
-            <strong id="guestName"></strong>
+            Kính gửi: <strong class="guestTitle"></strong>
+            <strong class="guestName"></strong>
           </p>
 
           <p>
             Với niềm vui và tự hào, chúng em - Bác sĩ nội trú thần kinh - Khóa
-            47 Trường Đại học Y Hà Nội xin trân trọng kính mời [Danh xưng] đến
-            dự bữa tiệc thân mật Chúc mừng Tốt nghiệp của chúng em.
+            47 Trường Đại học Y Hà Nội xin trân trọng kính mời
+            <strong class="guestTitle"></strong>
+            <strong class="guestName"></strong> đến dự bữa tiệc thân mật Chúc
+            mừng Tốt nghiệp của chúng em.
           </p>
 
           <p>
@@ -398,24 +400,25 @@
 
     <script>
       // Thay đổi URL này thành URL của Google Apps Script Web App
-      const GOOGLE_SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
+      const GOOGLE_SCRIPT_URL =
+        "https://script.google.com/macros/s/AKfycbzm5Ph5yCCWjuCEzsT9JbmuVHA01qh-8aJXke0kDxC5r0gz3FsmAnWLgdtVrHM_4O7w5w/exec";
 
       let guestData = null;
 
       // Parse invite data from URL
       function parseInviteData() {
         const urlParams = new URLSearchParams(window.location.search);
-        const inviteParam = urlParams.get("invite");
+        const title = urlParams.get("title");
+        const name = urlParams.get("name");
 
-        if (inviteParam) {
-          try {
-            const decoded = JSON.parse(decodeURIComponent(atob(inviteParam)));
-            return decoded;
-          } catch (e) {
-            console.error("Error parsing invite data:", e);
-            return null;
-          }
+        // Check if we have the new format with direct params
+        if (title && name) {
+          return {
+            title: decodeURIComponent(title),
+            name: decodeURIComponent(name),
+          };
         }
+
         return null;
       }
 
@@ -424,13 +427,21 @@
         guestData = parseInviteData();
 
         if (guestData) {
-          document.getElementById("guestTitle").textContent = guestData.title;
-          document.getElementById("guestName").textContent = guestData.name;
+          document.querySelectorAll(".guestTitle").forEach((element) => {
+            element.textContent = guestData.title;
+          });
+          document.querySelectorAll(".guestName").forEach((element) => {
+            element.textContent = guestData.name;
+          });
           document.getElementById("rsvpGuestName").textContent =
             guestData.title + " " + guestData.name;
         } else {
-          document.getElementById("guestTitle").textContent = "Quý khách";
-          document.getElementById("guestName").textContent = "";
+          document.querySelectorAll(".guestTitle").forEach((element) => {
+            element.textContent = guestData.title;
+          });
+          document.querySelectorAll(".guestName").forEach((element) => {
+            element.textContent = guestData.name;
+          });
           document.getElementById("rsvpGuestName").textContent = "Bạn";
         }
 
