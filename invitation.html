@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Thư Mời Tốt Nghiệp - Bác Sĩ Nội Trú K47</title>
+    <title>Thư Mời Tốt Nghiệp - Bác Sĩ nội Trú K47</title>
     <style>
       * {
         margin: 0;
@@ -302,17 +302,18 @@
           </p>
 
           <p>
-            Với niềm vui và tự hào, chúng em - Bác sĩ nội trú Thần kinh - Khóa
-            47 Trường Đại học Y Hà Nội xin trân trọng kính mời
-            <span class="guestTitle"></span> đến dự bữa tiệc thân mật chúc mừng
-            tốt nghiệp của chúng em.
+            Với niềm vui và tự hào, <span class="myTitle"></span> - Bác sĩ nội
+            trú Thần kinh - Khóa 47 Trường Đại học Y Hà Nội xin trân trọng kính
+            mời <span class="guestTitle"></span> đến dự bữa tiệc thân mật chúc
+            mừng tốt nghiệp của <span class="myTitle"></span>.
           </p>
 
           <p>
-            Sau những năm tháng học tập và rèn luyện không ngừng nghỉ, chúng em
-            đã hoàn thành chương trình đào tạo Bác sĩ Nội trú. Đây là dấu mốc
+            Sau những năm tháng học tập và rèn luyện không ngừng nghỉ,
+            <span class="myTitle"></span>
+            đã hoàn thành chương trình đào tạo Bác sĩ nội trú. Đây là dấu mốc
             quan trọng, đánh dấu bước chuyển mình trong sự nghiệp y khoa của
-            chúng em.
+            <span class="myTitle"></span>.
           </p>
 
           <div class="event-details">
@@ -381,7 +382,8 @@
 
           <p>
             Sự hiện diện của <span class="guestTitle"></span> sẽ là niềm vinh dự
-            và động lực to lớn cho chúng em trong hành trình phía trước.
+            và động lực to lớn cho <span class="myTitle"></span> trong hành
+            trình phía trước.
           </p>
 
           <p style="text-align: right; margin-top: 30px; font-style: italic">
@@ -459,6 +461,13 @@
           document.querySelectorAll(".guestName").forEach((element) => {
             element.textContent = guestData.name;
           });
+          document.querySelectorAll(".myTitle").forEach((element) => {
+            if (guestData.title === "Em") {
+              element.textContent = "anh chị";
+            } else {
+              element.textContent = "chúng em";
+            }
+          });
           document.getElementById("rsvpGuestName").textContent =
             guestData.title + " " + guestData.name;
         } else {
@@ -467,6 +476,9 @@
           });
           document.querySelectorAll(".guestName").forEach((element) => {
             element.textContent = guestData.name;
+          });
+          document.querySelectorAll(".myTittle").forEach((element) => {
+            element.textContent = "Chúng em";
           });
           document.getElementById("rsvpGuestName").textContent = "Bạn";
         }
@@ -561,11 +573,11 @@
           const thankYouMessage = document.getElementById("thankYouMessage");
 
           if (response === "Chắc chắn rồi") {
-            thankYouMessage.textContent =
-              "Chúng em rất vui mừng và mong chờ được gặp bạn tại sự kiện!";
+            thankYouMessage.innerHTML =
+              "Chúng tôi rất vui mừng và mong chờ được bạn tại sự kiện!";
           } else {
             thankYouMessage.textContent =
-              "Chúng tôi rất tiếc vì bạn không thể tham dự. Hẹn gặp lại bạn vào dịp khác!";
+              "Chúng tôi rất tiếc vì bạn không thể tham dự. Hẹn gặp lại vào dịp khác!";
           }
 
           thankYouDiv.classList.add("show");
