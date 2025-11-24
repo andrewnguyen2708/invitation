@@ -270,15 +270,26 @@
     </style>
   </head>
   <body>
-    <audio autoplay muted loop id="backgroundMusic">
-      <source src="./backgound_music.mp3" type="audio/mpeg" />
-      Your browser does not support the audio element.
-    </audio>
+    <div
+      style="
+        width: 100vw;
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        bottom: 0;
+        z-index: 10;
+      "
+    >
+      <audio controls loop style="">
+        <source src="./backgound_music.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+    </div>
     <div class="container">
       <div class="invitation-card">
         <div class="header">
           <h1>🎓 THƯ MỜI LIÊN HOAN TỐT NGHIỆP</h1>
-          <p class="subtitle">Bác sĩ nội trú thần kinh - khóa 47</p>
+          <p class="subtitle">Bác sĩ nội trú Thần kinh - khóa 47</p>
           <p class="subtitle">Trường Đại Học Y Hà Nội</p>
         </div>
 
@@ -291,11 +302,10 @@
           </p>
 
           <p>
-            Với niềm vui và tự hào, chúng em - Bác sĩ nội trú thần kinh - Khóa
+            Với niềm vui và tự hào, chúng em - Bác sĩ nội trú Thần kinh - Khóa
             47 Trường Đại học Y Hà Nội xin trân trọng kính mời
-            <strong class="guestTitle"></strong>
-            <strong class="guestName"></strong> đến dự bữa tiệc thân mật Chúc
-            mừng Tốt nghiệp của chúng em.
+            <span class="guestTitle"></span> đến dự bữa tiệc thân mật chúc mừng
+            tốt nghiệp của chúng em.
           </p>
 
           <p>
@@ -307,13 +317,23 @@
 
           <div class="event-details">
             <h3>📅 THÔNG TIN SỰ KIỆN</h3>
-            <p><strong>Thời gian:</strong> 19:00, Thứ Bảy, ngày 14/12/2024</p>
+            <p><strong>Thời gian:</strong> 18:00, Thứ Năm, ngày 27/11/2025</p>
             <p>
-              <strong>Địa điểm:</strong> Hội trường A1, Trường Đại học Y Hà Nội
+              <strong>Địa điểm:</strong> Tầng 2, Bò Tơ Quán Mộc Hoa Lư, 02 P.
+              Hoa Lư, Lê Đại Hành, Hai Bà Trưng, Hà Nội.
             </p>
-            <p><strong>Địa chỉ:</strong> Số 1 Tôn Thất Tùng, Đống Đa, Hà Nội</p>
             <p><strong>Dress code:</strong> Trang trọng</p>
           </div>
+
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.562577210095!2d105.84514167531154!3d21.010164380634535!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab4e1ba19b37%3A0x1efd1e5c66f3c162!2zQsOyIFTGoSBRdcOhbiBN4buZYyBIb2EgTMaw!5e0!3m2!1sen!2s!4v1764001248110!5m2!1sen!2s"
+            width="600"
+            height="450"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
 
           <p>Chương trình gồm:</p>
           <ul style="margin-left: 30px; margin-bottom: 15px">
@@ -340,10 +360,16 @@
               />
             </div>
             <div class="gallery-item">
-              <img src="photo3.jpg" alt="Team Building" loading="lazy" />
+              <img src="photo8.jpg" alt="Du lịch Hạ Long" loading="lazy" />
             </div>
             <div class="gallery-item">
-              <img src="photo4.jpg" alt="Chuyến đi Hạ Long" loading="lazy" />
+              <img src="photo9.jpg" alt="Du lịch Hạ Long" loading="lazy" />
+            </div>
+            <div class="gallery-item">
+              <img src="photo10.jpg" alt="Du lịch Hạ Long" loading="lazy" />
+            </div>
+            <div class="gallery-item">
+              <img src="photo11.jpg" alt="Du lịch Hạ Long" loading="lazy" />
             </div>
             <div class="gallery-item">
               <img src="photo5.jpg" alt="Teamwork" loading="lazy" />
@@ -354,14 +380,14 @@
           </div>
 
           <p>
-            Sự hiện diện của quý Thầy/Cô sẽ là niềm vinh dự và động lực to lớn
-            cho chúng em trong hành trình phía trước.
+            Sự hiện diện của <span class="guestTitle"></span> sẽ là niềm vinh dự
+            và động lực to lớn cho chúng em trong hành trình phía trước.
           </p>
 
           <p style="text-align: right; margin-top: 30px; font-style: italic">
             Trân trọng kính mời!<br />
             <strong>Ban Tổ Chức</strong><br />
-            Bác sĩ Nội trú thần kinh - Khóa 47<br />
+            Bác sĩ nội trú Thần kinh - Khóa 47<br />
             Trường ĐH Y Hà Nội
           </p>
         </div>
@@ -447,30 +473,6 @@
 
         // Start fireworks
         createFireworks();
-
-        // Handle audio autoplay
-        const audio = document.getElementById("backgroundMusic");
-
-        // Try to play immediately (will work muted)
-        audio.play().catch((e) => {
-          console.log("Initial autoplay failed, waiting for user interaction");
-        });
-
-        // Unmute on first user interaction
-        let hasUnmuted = false;
-        const unmuteAudio = () => {
-          if (!hasUnmuted && audio.muted) {
-            audio.muted = false;
-            audio.volume = 0.5; // Set to 50% volume
-            hasUnmuted = true;
-            console.log("Audio unmuted");
-          }
-        };
-
-        // Listen for any user interaction to unmute
-        ["click", "touchstart", "keydown"].forEach((event) => {
-          document.addEventListener(event, unmuteAudio, { once: true });
-        });
 
         // Show RSVP section when scrolling near bottom
         window.addEventListener("scroll", function () {
